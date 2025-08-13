@@ -1,7 +1,6 @@
-    <a
-      class="pill"
-      [ngClass]="{ 'active-pill': isActive }"
-      (click)="toggleLuz()"
-    >
-      <span>{{ name }}</span>
-    </a>
+<button
+ class="luz-item"
+ [ngClass]="{'on-button': state === 'on', 'off-button': state === 'off'}"
+>
+ {{ name }}
+</button>

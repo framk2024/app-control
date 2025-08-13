@@ -1,36 +1,64 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { Luz } from '../luz/luz';
+import { CommonModule } from '@angular/common';
+import { Estado } from '../../services/estado';
+import { computed, signal } from '@angular/core';
+
 @Component({
   selector: 'app-control',
-  imports: [RouterLink, Luz],
+  standalone: true,
+  imports: [RouterLink, Luz, CommonModule],
   templateUrl: './control.html',
   styleUrl: './control.scss'
 })
 export class Control {
-  
-  // app.component.ts o el componente de tu menú
-menuItems = [
-  { title: 'L1'},
-  { title: 'L2'},
-  { title: 'L3'},
-  { title: 'L4'},
-  { title: 'L5'},
-  { title: 'L6'},
-  { title: 'On'},
-  { title: 'Rs'}
-];
-constructor(private router: Router) {}
-selectItem(selectedItem: any) {
-  // Primero, desactiva todos los botones
-  //this.menuItems.forEach(item => item.isActive = false);
+  private readonly estadoService = inject(Estado);
+  private router = inject(Router);
 
-  // Luego, activa el botón seleccionado
-  selectedItem.isActive = true;
+  public onButtonState = signal<'on' | 'off'>('off');
+  public relayStatus = this.estadoService.relayStatus;
 
-  // Redirige a la nueva ruta
-  this.router.navigateByUrl(selectedItem.title.toLowerCase());
-}
+  // 💡 Lógica para transformar los nombres de los relés
+  public relays = computed(() => {
+    const status = this.relayStatus();
+    if (!status) {
+      return [];
+    }
+    return Object.entries(status).map(([id, state]) => {
+      const lightNumber = id.split('_')[1]; // 'relay_1' -> '1'
+      const lightName = `L${lightNumber}`; // '1' -> 'L1'
+      return { name: lightName, state: state };
+    });
+  });
 
+  onAllRelaysButtonClick() {
+    const currentState = this.onButtonState();
+    const newAction = currentState === 'off' ? 'on' : 'off';
+    this.estadoService.toggleAll(newAction).subscribe(() => {
+      this.onButtonState.set(newAction);
+      this.estadoService.refreshStatus();
+    });
+  }
+
+  onResetButtonClick() {
+    this.estadoService.refreshStatus();
+  }
+
+  // 💡 El nombre de la luz ahora es 'L1', 'L2', etc.
+  onRelayButtonClick(relayName: string) {
+    const relays = this.relayStatus();
+    if (relays) {
+      // Necesitas encontrar el ID del relé (relay_1) a partir del nombre (L1)
+      const relayId = Object.keys(relays).find(key => key.includes(relayName.substring(1)));
+      if (relayId) {
+        const currentState = (relays as any)[relayId];
+        const newAction = currentState === 'off' ? 'on' : 'off';
+        this.estadoService.toggleRelay(relayId, newAction).subscribe(() => {
+          this.estadoService.refreshStatus();
+        });
+      }
+    }
+  }
 }

@@ -1,19 +1,29 @@
 <div class="card">
   <div class="card-content">
-<div class="pill-group">
-  @for (item of menuItems; track item.title) {
-    <app-luz name={{item.title}} />
+    <div class="pill-group">
+      @for (relay of relays(); track relay.name) {
+        <app-luz
+          [name]="relay.name"
+          [state]="relay.state"
+          (click)="onRelayButtonClick(relay.name)"
+        />
+      }
 
-  }
-</div>
+      <button
+        class="menu-item"
+        [ngClass]="{'on-button': onButtonState() === 'on', 'off-button': onButtonState() === 'off'}"
+        (click)="onAllRelaysButtonClick()">
+          {{ onButtonState() === 'on' ? 'Off' : 'On' }}
+      </button>
+
+      <button class="menu-item off-button" (click)="onResetButtonClick()">
+        Rs
+      </button>
+    </div>
   </div>
   <div>
-    @for (item of [ { title: 'Menú', link: '' }, ]; track item.title) {
-    <a class="card-button" [routerLink]="item.link">
-      <span>{{ item.title }}</span>
+    <a class="card-button" [routerLink]="''">
+      <span>Menú</span>
     </a>
-    }
   </div>
 </div>
-
-

@@ -1,0 +1,139 @@
+:host {
+    --bright-blue: oklch(81.116% 0.16248 93.933);
+    --electric-violet: oklch(15.082% 0.00171 16.796);
+  
+
+    --gray-900: oklch(19.37% 0.006 300.98);
+    --gray-700: oklch(36.98% 0.014 302.71);
+    --gray-400: oklch(70.9% 0.015 304.04);
+
+    --red-to-pink-to-purple-vertical-gradient: linear-gradient(
+      180deg,
+      var(--orange-red) 0%,
+      var(--vivid-pink) 50%,
+      var(--electric-violet) 100%
+    );
+
+    --red-to-pink-to-purple-horizontal-gradient: linear-gradient(
+      90deg,
+      var(--orange-red) 0%,
+      var(--vivid-pink) 50%,
+      var(--electric-violet) 100%
+    );
+
+    --pill-accent: var(--bright-blue);
+
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+
+.card {
+  width: 160px; // Aumentamos el ancho para que se vea mejor
+  height: 240px; // Aumentamos la altura para que se vea mejor
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: sans-serif;
+  color: rgb(14, 119, 216);
+  // Usamos Flexbox para el contenedor principal
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .card-image {
+    width: 100%;
+    height: 300px; // Aumentamos la altura de la imagen
+    object-fit: cover;
+    // Solo aplicamos bordes redondeados en la parte superior
+    border-radius: 10px;
+  }
+
+  .card-content {
+    padding: 1rem;
+    display: flex;
+    color: rgb(14, 119, 216);
+    flex-direction: column; // Los elementos se apilarán verticalmente
+    align-items: center; // Los elementos se centran horizontalmente
+    gap: 0.5rem; // Espacio entre los elementos de contenido
+
+    .card-title {
+      font-size: 1.25rem;
+      margin: 0;
+    }
+    
+    .card-text {
+      color: rgb(255, 255, 255);
+      text-align: center; // Centrar el texto
+      margin: 0;
+    }
+  }
+  
+  .card-button {
+    background-color: #3f51b5;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 1.2rem; // Espacio superior para separarlo del contenido
+    margin-bottom: 1rem; // Espacio superior para separarlo del contenido
+    
+    &:hover {
+      background-color: #303f9f;
+    }
+  }
+}
+
+.pill {
+    display: inline-block;
+    align-items: center;
+    --pill-accent: var(--bright-blue);
+    background: color-mix(in srgb, var(--pill-accent) 40%, transparent);
+    color: #181817, ;
+    padding-inline: 0.75rem;
+    padding-block: 0.375rem;
+    border-radius: 2.75rem;
+    border: 0;
+    transition: background 0.3s ease;
+    font-family: var(--inter-font);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.4rem;
+    letter-spacing: -0.00875rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+ 
+
+
+
+
+
+
+  .pill-group svg {
+    margin-inline-start: 0.25rem;
+  }
+  
+  .pill-group {
+  display: grid;
+  // Define que habrá dos columnas, cada una ocupando el mismo espacio (1fr)
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  // Centra el contenido horizontalmente
+  justify-items: center; 
+  // Alinea las filas al centro
+  align-items: center; 
+}
+
+/* app.component.scss */
+
+

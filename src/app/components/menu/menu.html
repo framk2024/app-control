@@ -1,0 +1,13 @@
+      <div class="pill-group">
+        @for (item of [
+          { title: 'Dashboard', link: 'dash' },
+          { title: 'Controles', link: 'ctrl' }
+        ]; track item.title) {
+          <a
+            class="pill"
+            [routerLink] ="item.link"
+          >
+            <span>{{ item.title }}</span>
+          </a>
+        }           
+      </div>

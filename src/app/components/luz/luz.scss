@@ -1,0 +1,40 @@
+/* LuzComponent.scss */
+.pill {
+  display: inline-block;
+  align-items: center;
+  --pill-accent: var(--bright-blue);
+  background: color-mix(in srgb, var(--pill-accent) 40%, transparent);
+  color: #f5f5f1; 
+  padding-inline: 0.75rem;
+  padding-block: 0.375rem;
+  border-radius: 2.75rem;
+  border: 0;
+  transition: background 0.3s ease, color 0.3s ease;
+  font-family: var(--inter-font);
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.4rem;
+  letter-spacing: -0.00875rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.pill:hover {
+  //background: color-mix(in srgb, var(--pill-accent) 15%, transparent);
+}
+
+.pill-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  justify-items: center; 
+  align-items: center; 
+}
+
+/* Estilos para el estado activo de los botones */
+.active-pill {
+  --pill-accent: var(--bright-blue);
+  background: color-mix(in srgb, var(--pill-accent) 100%, transparent);
+  color: rgb(12, 12, 12); 
+}

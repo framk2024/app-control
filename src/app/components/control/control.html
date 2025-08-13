@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-content">
+<div class="pill-group">
+  @for (item of menuItems; track item.title) {
+    <app-luz name={{item.title}} />
+
+  }
+</div>
+  </div>
+  <div>
+    @for (item of [ { title: 'Menú', link: '' }, ]; track item.title) {
+    <a class="card-button" [routerLink]="item.link">
+      <span>{{ item.title }}</span>
+    </a>
+    }
+  </div>
+</div>
+
+

@@ -33,32 +33,41 @@ export class Control {
     });
   });
 
-  onAllRelaysButtonClick() {
-    const currentState = this.onButtonState();
-    const newAction = currentState === 'off' ? 'on' : 'off';
-    this.estadoService.toggleAll(newAction).subscribe(() => {
-      this.onButtonState.set(newAction);
+onAllRelaysButtonClick() {
+  const currentState = this.onButtonState();
+  const newAction = currentState === 'off' ? 'on' : 'off';
+
+  this.estadoService.toggleAll(newAction).subscribe(() => {
+    // Actualizar el estado visual del botón principal inmediatamente
+    this.onButtonState.set(newAction);
+
+    // Esperar para que el ESP32 y el worker actualicen el archivo de estado
+    setTimeout(() => {
       this.estadoService.refreshStatus();
-    });
-  }
+    }, 300); // 500ms es seguro para 4 relés
+  });
+}
 
   onResetButtonClick() {
     this.estadoService.refreshStatus();
   }
 
   // 💡 El nombre de la luz ahora es 'L1', 'L2', etc.
-  onRelayButtonClick(relayName: string) {
-    const relays = this.relayStatus();
-    if (relays) {
-      // Necesitas encontrar el ID del relé (relay_1) a partir del nombre (L1)
-      const relayId = Object.keys(relays).find(key => key.includes(relayName.substring(1)));
-      if (relayId) {
-        const currentState = (relays as any)[relayId];
-        const newAction = currentState === 'off' ? 'on' : 'off';
-        this.estadoService.toggleRelay(relayId, newAction).subscribe(() => {
+onRelayButtonClick(relayName: string) {
+  const relays = this.relayStatus();
+  if (relays) {
+    const relayId = Object.keys(relays).find(key => key.includes(relayName.substring(1)));
+    if (relayId) {
+      const currentState = (relays as any)[relayId];
+      const newAction = currentState === 'off' ? 'on' : 'off';
+      
+      this.estadoService.toggleRelay(relayId, newAction).subscribe(() => {
+        // Esperar 400ms para que el ESP32 y el worker actualicen el estado
+        setTimeout(() => {
           this.estadoService.refreshStatus();
-        });
-      }
+        }, 200);
+      });
     }
   }
+}
 }

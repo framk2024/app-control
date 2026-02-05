@@ -1,0 +1,15 @@
+<div class="dashboard-wrapper">
+  <div class="header">
+    <h1>Dashboard Energético SAICL</h1>
+  </div>
+  <div class="stats-grid">
+    <app-gauge *ngFor="let light of lights" [value]="light.percentage" [label]="light.id"></app-gauge>
+  </div>
+  <div class="summary-card" *ngIf="!loading">
+    <div class="total-stat"><span>Consumo Teórico:</span> <strong>{{ formatHours(totalTheoretical) }} h</strong></div>
+    <div class="total-stat"><span>Consumo Real:</span> <strong class="accent">{{ formatHours(totalReal) }} h</strong></div>
+    <div class="percentage-savings" *ngIf="totalTheoretical > 0">
+      Ahorro: {{ (totalSavings / totalTheoretical * 100) | number:'1.1-1' }}%
+    </div>
+  </div>
+</div>

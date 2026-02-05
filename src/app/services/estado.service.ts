@@ -1,16 +1,13 @@
-// src/app/services/estado.service.ts
-import { Injectable, inject, Signal, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Injectable, inject, signal } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiResponse, RelayStatus } from '../models/estado';
 import { map, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
-export class Estado {
+export class EstadoService {
   private readonly http = inject(HttpClient);
   private apiUrl = environment.apiUrl;
 
@@ -30,7 +27,6 @@ export class Estado {
   }
 
   // Método para refrescar el estado de la Signal desde la API
-
   public refreshStatus() {
     this.http
       .get<ApiResponse>(`${this.apiUrl}/status`, this.options)
@@ -41,17 +37,21 @@ export class Estado {
   }
 
   // Método para encender/apagar todos los relés
-
   public toggleAll(action: 'on' | 'off'): Observable<any> {
     return this.http.get(`${this.apiUrl}/all/${action}`, this.options);
   }
 
   // Método para controlar un solo relé
-
   public toggleRelay(relayId: string, action: 'on' | 'off'): Observable<any> {
     const id = relayId.split('_')[1];
     return this.http.get(`${this.apiUrl}/relay/${id}/${action}`, this.options);
   }
 }
 
+/*
+ public toggleAll(action: 'on' | 'off'): Observable<any> {
+    return this.http.get(`${this.apiUrl}/all/${action}`, this.options);
+  }
+
+*/
 

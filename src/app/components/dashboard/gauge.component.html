@@ -1,0 +1,16 @@
+<div class="gauge-container">
+  <svg viewBox="0 0 100 60" class="gauge">
+    <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" class="bg-track" />
+    <path d="M 10 50 A 40 40 0 0 1 40 14" fill="none" class="segment green" />
+    <path d="M 40 14 A 40 40 0 0 1 70 20" fill="none" class="segment yellow" />
+    <path d="M 70 20 A 40 40 0 0 1 90 50" fill="none" class="segment red" />
+    <path 
+      d="M 10 50 A 40 40 0 0 1 90 50" 
+      fill="none" 
+      class="value-track"
+      [style.strokeDasharray]="strokeDashArray"
+    />
+    <text x="50" y="45" text-anchor="middle" class="percentage-text">{{ value | number:'1.0-0' }}%</text>
+  </svg>
+  <div class="label">{{ label }}</div>
+</div>

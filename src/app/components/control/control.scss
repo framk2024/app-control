@@ -40,6 +40,12 @@
   overflow: hidden;
   font-family: sans-serif;
   color: rgb(14, 119, 216);
+  
+  // Estilos solicitados: Fondo blanco, borde negro y subir posición
+  background-color: white;
+  border: 1px solid black;
+  margin-top: -140px; // Subido aún más (~4-5cm total)
+
   // Usamos Flexbox para el contenedor principal
   display: flex;
   flex-direction: column;
@@ -123,6 +129,39 @@
     margin-inline-start: 0.25rem;
   }
   
+  .menu-item {
+    padding: 0 16px; 
+    height: 36px;    
+    min-width: 50px; 
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    color: #fff;
+    font-weight: 500;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  // Estilo Rojo para el botón de Power
+  .power-item {
+    background-color: #e74c3c; // Rojo
+    &:hover { background-color: #c0392b; }
+    
+    // Si quieres que cambie de tono cuando está encendido, descomenta esto o ajústalo
+    // &.active { background-color: #ff0000; box-shadow: 0 0 10px rgba(255,0,0,0.5); }
+  }
+
+  // Estilo Verdecito para el botón de Reset (Rs)
+  .reset-item {
+    background-color: #2ecc71; // Verdecito (Emerald)
+    &:hover { background-color: #27ae60; }
+  }
+
   .pill-group {
   display: grid;
   // Define que habrá dos columnas, cada una ocupando el mismo espacio (1fr)

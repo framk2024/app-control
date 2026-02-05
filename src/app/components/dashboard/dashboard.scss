@@ -1,57 +1,176 @@
 .card {
-  width: 250px; // Aumentamos el ancho para que se vea mejor
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  height: 620px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   overflow: hidden;
-  font-family: sans-serif;
-  color: rgb(14, 119, 216);
-  // Usamos Flexbox para el contenedor principal
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: linear-gradient(145deg, #444, #222);
+  margin: 0; // Eliminamos margen para evitar el salto al entrar
+  padding-bottom: 20px;
 
-  .card-image {
-    width: 100%;
-    height: 200px; // Aumentamos la altura de la imagen
-    object-fit: cover;
-    // Solo aplicamos bordes redondeados en la parte superior
-    border-radius: 10px;
+  // BLOQUEO TOTAL DE ANIMACIONES Y TRANSICIONES
+  * {
+    transition: none !important;
+    animation: none !important;
   }
 
   .card-content {
-    padding: 1rem;
-    display: flex;
-    color: rgb(14, 119, 216);
-    flex-direction: column; // Los elementos se apilarán verticalmente
-    align-items: center; // Los elementos se centran horizontalmente
-    gap: 0.5rem; // Espacio entre los elementos de contenido
+    padding: 1.5rem 1rem;
+    text-align: center;
+    width: 100%;
 
     .card-title {
-      font-size: 1.25rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #7abaff;
       margin: 0;
+      text-transform: uppercase;
     }
-    
+
     .card-text {
-      color: rgb(255, 255, 255);
-      text-align: center; // Centrar el texto
-      margin: 0;
+      color: #aaa;
+      font-size: 0.8rem;
+      margin-top: 5px;
     }
   }
-  
+
+  .bars-wrapper {
+    width: 90%;
+    height: 140px;
+    margin-bottom: 20px;
+  }
+
+  .bar-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+
+    .bar-label {
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: #aaa;
+      text-transform: uppercase;
+    }
+
+    .bar-track {
+      width: 100%;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 6px;
+
+      &.red {
+        background: #f44336;
+      }
+
+      &.yellow {
+        background: #ffc107;
+      }
+
+      &.green {
+        background: #4caf50;
+      }
+    }
+  }
+
+  .gauges-container {
+    display: grid;
+    grid-template-columns: repeat(2, 120px);
+    grid-template-rows: repeat(2, 100px);
+    gap: 10px;
+    padding: 10px;
+    width: 250px;
+    height: 210px;
+    margin: 0 auto;
+    justify-items: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    transform: translateZ(0); // Hardware acceleration
+  }
+
+  app-gauge {
+    display: block;
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .summary-details {
+    width: 90%;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+
+    .stat-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      padding: 2px 0;
+
+      &.historical {
+        color: #ffab91;
+      }
+
+      // Warm oranje for highest
+      &.theoretical {
+        color: #fff;
+      }
+
+      &.real {
+        color: #64b5f6;
+        font-weight: bold;
+      }
+    }
+
+    .real-value {
+      color: #64b5f6;
+      font-weight: bold;
+    }
+
+    .savings-highlight {
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #8ed391;
+      margin-top: 5px;
+    }
+  }
+
+  .loading-state {
+    padding: 20px;
+    color: #7abaff;
+    font-size: 0.9rem;
+  }
+
   .card-button {
     background-color: #3f51b5;
     color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 5px;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    transition: background-color 0.3s ease;
-    margin-top: 1rem; // Espacio superior para separarlo del contenido
-    margin-bottom: 1rem; // Espacio superior para separarlo del contenido
-    
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+
     &:hover {
       background-color: #303f9f;
+      transform: scale(1.05);
     }
   }
 }

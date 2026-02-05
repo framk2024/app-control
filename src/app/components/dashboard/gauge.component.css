@@ -1,0 +1,58 @@
+.gauge-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+    margin: 5px;
+    font-family: inherit;
+}
+
+.gauge {
+    width: 100%;
+    height: auto;
+}
+
+path {
+    stroke-width: 10;
+    stroke-linecap: round;
+}
+
+.bg-track {
+    stroke: #e0e0e0;
+}
+
+.segment {
+    stroke-width: 11;
+    opacity: 0.3;
+}
+
+.green {
+    stroke: #8bc34a;
+}
+
+.yellow {
+    stroke: #ffeb3b;
+}
+
+.red {
+    stroke: #f44336;
+}
+
+.value-track {
+    stroke: #2196f3;
+    stroke-width: 10;
+    transition: stroke-dasharray 1s ease-in-out;
+}
+
+.percentage-text {
+    font-size: 11px;
+    font-weight: bold;
+    fill: #fff;
+}
+
+.label {
+    margin-top: -5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+}
